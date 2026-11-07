@@ -1,0 +1,1 @@
+var e=`/financials-brag/app/assets/pdf.worker.min-yatZIOMy.mjs`;export{e as default};

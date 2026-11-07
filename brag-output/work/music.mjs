@@ -1,11 +1,13 @@
 // Synthesizes the soundtrack: 96 BPM, A minor, Am–F–C–G. Every event sits on the beat grid from t = 0.
+//   node music.mjs [beats] [cut,cut,...] [out.wav]     (defaults: the 21 s cut)
 import { writeFileSync } from "node:fs";
 
-const SR = 48000, BPM = 96, BEAT = 60 / BPM, BEATS = 34, LEN = BEATS * BEAT;
+const SR = 48000, BPM = 96, BEAT = 60 / BPM, BEATS = Number(process.argv[2] ?? 34), LEN = BEATS * BEAT;
 const N = Math.ceil(LEN * SR);
 const L = new Float32Array(N), R = new Float32Array(N), send = new Float32Array(N);
 const hz = (m) => 440 * Math.pow(2, (m - 69) / 12);
-const CUTS = [5, 9, 17, 23, 29]; // scene changes, in beats
+const CUTS = (process.argv[3] ?? "5,9,17,23,29").split(",").map(Number); // scene changes, in beats
+const APP_FROM = CUTS.find((c) => c >= 9) ?? 9, APP_TO = CUTS[CUTS.length - 1]; // the app scenes, for shaker + arpeggio
 const CHORDS = [[57, 60, 64], [53, 57, 60], [48, 52, 55], [55, 59, 62]]; // Am F C G (MIDI)
 const ROOTS = [45, 41, 48, 43];
 
@@ -46,13 +48,13 @@ for (let b = 4; b < BEATS - 2; b += 2) {
 // Shaker: quiet off-beat eighths through the app scenes.
 let seed = 7;
 const noise = () => ((seed = (seed * 1664525 + 1013904223) >>> 0) / 2 ** 31) - 1;
-for (let b = 9; b < 29; b++) {
+for (let b = APP_FROM; b < APP_TO; b++) {
   let prev = 0;
   add((b + 0.5) * BEAT, 0.08, (t) => { const x = noise(), hp = x - prev; prev = x; return hp * Math.exp(-t * 60); }, 0.025, b % 2 ? 0.3 : -0.3, 0.3);
 }
 
 // Arpeggio: glassy eighths on chord tones during the app scenes.
-for (let b = 9; b < 29; b++) {
+for (let b = APP_FROM; b < APP_TO; b++) {
   for (const half of [0, 0.5]) {
     const ch = CHORDS[Math.floor(b / 4) % 4], step = (b * 2 + half * 2) % 3;
     const f = hz(ch[step] + 12);
@@ -98,5 +100,6 @@ for (let i = 0; i < N; i++) {
   out.writeInt16LE(Math.round(L[i] * norm * 32767), 44 + i * 4);
   out.writeInt16LE(Math.round(R[i] * norm * 32767), 46 + i * 4);
 }
-writeFileSync(new URL("./music.wav", import.meta.url), out);
-console.log(`music.wav ${LEN.toFixed(3)}s`);
+const file = process.argv[4] ?? "music.wav";
+writeFileSync(new URL(`./${file}`, import.meta.url), out);
+console.log(`${file} ${LEN.toFixed(3)}s`);
