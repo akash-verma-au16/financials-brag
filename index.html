@@ -4,56 +4,80 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Financials</title>
-<meta name="description" content="One private page for net worth, spending and where it's all headed.">
+<meta name="description" content="A private household finance dashboard: net worth, spending, holdings looked through to the companies, projections. Try the demo in your browser.">
 <meta property="og:title" content="Financials">
-<meta property="og:description" content="One private page for net worth, spending and where it's all headed.">
+<meta property="og:description" content="A private household finance dashboard. Try the demo in your browser, on fictional data.">
 <meta property="og:image" content="brag.jpg">
 <meta property="og:type" content="video.other">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <style>
-  :root { --bg: #e9e4db; --panel: #efeae2; --ink: #221f19; --ink-2: #4f4b44; --ink-3: #66625a; --border: #d4cdc1; --accent: #3a60aa; }
+  :root { --bg: #e9e4db; --panel: #efeae2; --ink: #221f19; --ink-2: #4f4b44; --ink-3: #66625a; --border: #d4cdc1; --accent: #3a60aa; --accent-fg: #f3f1ec; }
   @media (prefers-color-scheme: dark) {
-    :root:not([data-theme="light"]) { --bg: #191c20; --panel: #202327; --ink: #e8ebef; --ink-2: #b6bbc1; --ink-3: #90969d; --border: #2d3135; --accent: #759ee9; }
+    :root:not([data-theme="light"]) { --bg: #191c20; --panel: #202327; --ink: #e8ebef; --ink-2: #b6bbc1; --ink-3: #90969d; --border: #2d3135; --accent: #759ee9; --accent-fg: #10182a; }
   }
-  :root[data-theme="dark"] { --bg: #191c20; --panel: #202327; --ink: #e8ebef; --ink-2: #b6bbc1; --ink-3: #90969d; --border: #2d3135; --accent: #759ee9; }
+  :root[data-theme="dark"] { --bg: #191c20; --panel: #202327; --ink: #e8ebef; --ink-2: #b6bbc1; --ink-3: #90969d; --border: #2d3135; --accent: #759ee9; --accent-fg: #10182a; }
   * { box-sizing: border-box; }
   body { margin: 0; background: var(--bg); color: var(--ink); font: 16px/1.55 Inter, system-ui, -apple-system, "Segoe UI", sans-serif; }
-  main { max-width: 1040px; margin: 0 auto; padding: 56px 16px 72px; }
-  header { display: flex; align-items: center; gap: 14px; margin-bottom: 10px; }
-  header svg { width: 40px; height: 40px; flex: none; }
-  h1 { font-size: clamp(30px, 5vw, 44px); letter-spacing: -0.035em; margin: 0; font-weight: 650; }
-  .lede { font-size: clamp(18px, 2.4vw, 22px); color: var(--ink-2); margin: 0 0 32px; letter-spacing: -0.01em; }
-  video { width: 100%; display: block; border-radius: 16px; border: 1px solid var(--border); background: #000; box-shadow: 0 30px 70px rgba(40, 30, 15, .16); }
-  .copy { margin-top: 28px; padding: 20px 22px; border-radius: 14px; background: var(--panel); border: 1px solid var(--border); color: var(--ink-2); }
+  .wrap { max-width: 1120px; margin: 0 auto; padding: 0 16px; }
+  header { padding: 48px 0 28px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 20px; }
+  .brand { display: flex; align-items: center; gap: 14px; }
+  .brand svg { width: 44px; height: 44px; flex: none; }
+  h1 { font-size: clamp(32px, 5vw, 48px); letter-spacing: -0.04em; margin: 0; font-weight: 650; line-height: 1.05; }
+  .lede { font-size: clamp(17px, 2.2vw, 21px); color: var(--ink-2); margin: 6px 0 0; letter-spacing: -0.01em; max-width: 640px; }
+  .cta { display: inline-flex; align-items: center; gap: 10px; padding: 14px 22px; border-radius: 12px; background: var(--accent); color: var(--accent-fg); font-weight: 600; font-size: 17px; text-decoration: none; box-shadow: 0 10px 30px rgba(58, 96, 170, .25); white-space: nowrap; }
+  .cta:hover { filter: brightness(1.08); }
+  .cta small { font-weight: 450; opacity: .85; font-size: 14px; }
+  .video { width: min(1600px, 100%); margin: 0 auto; padding: 0 16px; }
+  video { width: 100%; display: block; border-radius: 16px; border: 1px solid var(--border); background: #000; box-shadow: 0 30px 70px rgba(40, 30, 15, .18); }
+  .copy { margin: 32px 0 0; padding: 20px 22px; border-radius: 14px; background: var(--panel); border: 1px solid var(--border); color: var(--ink-2); }
   .copy b { color: var(--ink); }
-  ul { margin: 28px 0 0; padding: 0; list-style: none; display: grid; gap: 14px; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+  h2 { font-size: 22px; letter-spacing: -0.02em; margin: 40px 0 14px; }
+  ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 12px; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
   li { padding: 16px 18px; border-radius: 12px; border: 1px solid var(--border); }
   li strong { display: block; color: var(--ink); margin-bottom: 2px; }
   li span { color: var(--ink-3); font-size: 15px; }
-  footer { margin-top: 36px; font-size: 14px; color: var(--ink-3); }
+  .again { margin: 36px 0 0; text-align: center; }
+  footer { margin: 40px 0 64px; font-size: 14px; color: var(--ink-3); }
   footer a { color: var(--accent); }
 </style>
 </head>
 <body>
-<main>
+<div class="wrap">
   <header>
-    <svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="8" fill="#3e66b3"/><path d="M8 22l5-6 4 3 7-9" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-    <h1>Financials</h1>
+    <div>
+      <div class="brand">
+        <svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="8" fill="#3e66b3"/><path d="M8 22l5-6 4 3 7-9" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <h1>Financials</h1>
+      </div>
+      <p class="lede">One private page for a household's money: net worth, spending, every fund looked through to the companies, and where it's all headed.</p>
+    </div>
+    <a class="cta" href="app/">Open the live demo <small>no sign-in</small></a>
   </header>
-  <p class="lede">One private page for net worth, spending and where it's all headed.</p>
+</div>
 
+<div class="video">
   <video src="brag.mp4" poster="brag.jpg" controls playsinline preload="metadata"></video>
+</div>
 
-  <p class="copy"><b>Why I built it.</b> I got tired of logging into every bank to answer "how are we doing?" Financials reads my own Google Sheets live in the browser and stores nothing.</p>
+<div class="wrap">
+  <p class="copy"><b>Why I built it.</b> I got tired of logging into every bank to answer "how are we doing?" Financials reads my own Google Sheets and bank statements, live and privately. The demo above runs the same app in your browser on made-up data.</p>
 
+  <h2>What's inside</h2>
   <ul>
-    <li><strong>Net worth at a glance</strong><span>Assets, debt and cash on hand across every account.</span></li>
-    <li><strong>Every month, every category</strong><span>Spending month by month, compared with last year.</span></li>
-    <li><strong>Where it's headed</strong><span>TFSA, RRSP and FHSA projected 25 years out.</span></li>
-    <li><strong>Private by design</strong><span>Data stays in your sheets. Nothing stored, nothing shared.</span></li>
+    <li><strong>Overview and net worth</strong><span>Assets, debt and cash, how they moved, and what they're made of.</span></li>
+    <li><strong>Spending</strong><span>Month by month, by category and merchant, with recurring payments found for you.</span></li>
+    <li><strong>Credit cards and bank accounts</strong><span>Each on its own: e-Transfers, bills and big payments.</span></li>
+    <li><strong>Cash flow</strong><span>An income statement for the household, with every transaction.</span></li>
+    <li><strong>Holdings, inside every fund</strong><span>Each ETF looked through to the companies, with its fees and price history.</span></li>
+    <li><strong>Portfolio analysis</strong><span>Sectors, countries, currencies, fee tiers, overlap and how the mix would have done.</span></li>
+    <li><strong>Investment income</strong><span>Every dividend and distribution, by month and by holding.</span></li>
+    <li><strong>Contribution room</strong><span>TFSA, RRSP and FHSA, counted from your transactions.</span></li>
+    <li><strong>Projections and calculators</strong><span>Twenty-five years out, low to high case, and mortgage what-ifs.</span></li>
   </ul>
 
-  <footer>Everything in the video is the app's demo mode: every name and number is fictional. Video made with <a href="https://github.com/latent-spaces/brag">/brag</a>.</footer>
-</main>
+  <p class="again"><a class="cta" href="app/">Try it yourself <small>runs in your browser</small></a></p>
+
+  <footer>Everything in the video and the demo is fictional: every name, account and number. Nothing you do in the demo leaves your browser. Video made with <a href="https://github.com/latent-spaces/brag">/brag</a>.</footer>
+</div>
 </body>
 </html>
