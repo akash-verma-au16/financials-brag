@@ -1,0 +1,8 @@
+# Example chequing account fed by CSV exports from online banking.
+institution: Example Bank
+type: chequing
+name: Everyday Chequing
+date_format: MDY             # how the CSV writes dates like 03/04/2026
+# Not in Wealthica? Give a balance so net worth includes it:
+balance: 2500.00
+balance_date: 2026-01-31

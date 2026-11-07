@@ -1,0 +1,9 @@
+# Example credit card with monthly PDF statements, one folder per year: YYYY/YYYY-MM.pdf
+# (by statement date). Supported PDF layouts: see tools/pdf-profiles.ts. For another bank, see
+# "A new bank's PDF layout" in statements/README.md.
+institution: Scotiabank      # as Wealthica names the bank, so it merges with the same card there
+type: credit
+name: Example Visa
+# last4 is read from supported statements; set it here for CSVs or unsupported layouts:
+# last4: "1234"
+pending: true                # remove once your first statement is in and parses on the Data page

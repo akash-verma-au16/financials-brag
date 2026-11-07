@@ -1,0 +1,38 @@
+# dependencies & build
+node_modules/
+dist/
+dist-demo/
+.vite/
+*.tsbuildinfo
+
+# env & secrets — NEVER commit
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*credentials*.json
+*service-account*.json
+client_secret*.json
+
+# YOUR personal financial data — NEVER commit to a public repo.
+# The app reads and writes these through the local server (tools/api.ts). The server also tries to
+# `git commit` them after each save; with these lines in place that commit is skipped and the files
+# are simply saved on disk. If (and only if) your repo is PRIVATE and you want version history of
+# your data, you may remove the lines below. See SETUP.md → "Your data and git".
+config/settings.json
+contribution-limits.yaml
+data/*
+!data/README.md
+statements/*
+!statements/README.md
+*.export.csv
+*.export.xlsx
+*.backup.json
+
+# tooling
+.playwright-mcp/
+.claude/settings.local.json
+.DS_Store
+Thumbs.db
+*.log

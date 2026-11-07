@@ -1,0 +1,37 @@
+{
+  "updatedAt": 0,
+  "data": {
+    "people": [
+      { "id": "me", "name": "Me" },
+      { "id": "p_partner", "name": "Partner" }
+    ],
+    "accountOwners": {
+      "a_0000000000000001": ["me", "p_partner"]
+    },
+    "accountLabels": {
+      "a_0000000000000001": "Joint chequing ··0001"
+    },
+    "closedAccounts": {
+      "a_0000000000000002": "2026-01-31"
+    },
+    "instrumentOverrides": {},
+    "rules": [
+      { "match": "SAMPLE PROPERTY MGMT", "category": "rent", "direction": "out" },
+      { "match": "PAYROLL EXAMPLE CORP", "category": "salary", "direction": "in" },
+      { "match": "CORNER COFFEE", "category": "restaurants" }
+    ],
+    "roomExclusions": [],
+    "circle": ["Partner Name"],
+    "birthYear": null,
+    "marketLinks": {
+      "XEQT": "XEQT.TO"
+    },
+    "feeOverrides": {},
+    "taxRate": 0.3
+  },
+  "sources": [
+    { "id": "<your-google-sheet-id-for-wealthica-accounts>", "title": "Portfolio Accounts" },
+    { "id": "<your-google-sheet-id-for-wealthica-positions>", "title": "Portfolio Positions" },
+    { "id": "<your-google-sheet-id-for-wealthica-transactions>", "title": "Portfolio Transactions" }
+  ]
+}

@@ -1,0 +1,10 @@
+# Example card whose CSV export always contains everything since the card opened.
+# Yearly ledger: <YYYY>.csv holds every transaction of that year. Drop a new export in this
+# folder (or upload it from Settings → Statement accounts) and only the new rows are merged in,
+# then the export is deleted.
+institution: Wealthsimple
+type: credit
+name: Example Credit Card
+ledger: yearly
+# If the exports start at the card's opening with nothing owed, the balance can be worked out:
+opening_balance: 0

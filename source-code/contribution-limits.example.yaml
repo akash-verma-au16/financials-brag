@@ -1,0 +1,47 @@
+# TEMPLATE — copy to contribution-limits.yaml (git-ignored) and fill in YOUR numbers.
+#   cp contribution-limits.example.yaml contribution-limits.yaml
+#
+# Registered-account contribution limits, one entry per tax year. These are personal to you
+# (they come from your own CRA account), which is why the original author's file isn't shipped.
+#
+# Update once a year from CRA My Account (or your notice of assessment). Leave a value empty
+# when you don't know it yet: the app then shows "limit unknown" but still totals what you've
+# contributed. The app picks the current calendar year automatically. If this file is missing,
+# the Room page simply shows every limit as unknown.
+#
+# Applies to the first person in Settings → Household (the default owner).
+# Never bundled into the website as plain text: the local server reads it and only returns it
+# after Google sign-in (tools/api.ts).
+
+types:
+  tfsa:
+    description: >-
+      TFSA contribution room on January 1 of the year (CRA My Account → RRSP and TFSA →
+      TFSA contribution room). Already includes unused room and last year's withdrawals.
+  rrsp:
+    description: >-
+      RRSP deduction limit for the year, from last year's notice of assessment. Contributions
+      count from day 61 of the year to day 60 of the next (the first-60-days rule).
+  fhsa:
+    description: >-
+      FHSA participation room for the year (annual $8,000 plus up to $8,000 carried forward;
+      $40,000 lifetime). Counts calendar-year contributions.
+
+years:
+  # Example of a filled-in year (fictional numbers — replace with yours or delete):
+  # 2026:
+  #   tfsa: 18500.00
+  #   rrsp: 9250.00
+  #   fhsa: 8000.00
+  2026:
+    tfsa:
+    rrsp:
+    fhsa:
+  2027:
+    tfsa:
+    rrsp:
+    fhsa:
+  2028:
+    tfsa:
+    rrsp:
+    fhsa:

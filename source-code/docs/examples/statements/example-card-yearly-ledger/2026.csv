@@ -1,0 +1,4 @@
+transaction_date,transaction_type,status,merchant,amount,currency,notes,category
+2026-01-03,Purchase,Completed,Corner Coffee,-4.50,CAD,,Restaurants
+2026-01-10,Purchase,Completed,Example Grocery,-41.07,CAD,,Groceries
+2026-01-20,Payment,Completed,Payment,45.57,CAD,,

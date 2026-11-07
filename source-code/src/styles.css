@@ -1,0 +1,185 @@
+@import "tailwindcss";
+@import "@fontsource-variable/inter";
+@import "@fontsource-variable/geist-mono";
+
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
+/* ── Semantic tokens: light ("paper") ─────────────────────────────── */
+:root {
+  color-scheme: light;
+  /* Warm stone, deliberately dim: no surface is near-white. */
+  --surface-bg-deep: #e2ddd3;
+  --surface-bg: #e9e4db;
+  --surface-panel: #efeae2;
+  --surface-raised: #f2eee7;
+  --surface-overlay: #f3efe8;
+  --surface-hover: #e4ded4;
+  --surface-selected: #dad3c7;
+
+  --text-1: #221f19;
+  --text-2: #4f4b44;
+  --text-3: #66625a;
+  --text-disabled: #8a867e;
+
+  --border-subtle: #d4cdc1;
+  --border: #c3bbae;
+  --border-strong: #a0988b;
+  --focus-ring: #3e66b3;
+
+  --accent: #3a60aa;
+  --accent-hover: #2e5299;
+  --accent-subtle: #d9e2f1;
+  --accent-fg: #f3f1ec;
+
+  --pos: #00705f;
+  --pos-subtle: #d2e6df;
+  --neg: #a83416;
+  --neg-subtle: #f1dad1;
+  --warn: #8d5a0b;
+  --warn-subtle: #efe0c0;
+  --info: #0e5f95;
+  --info-subtle: #d5e3ef;
+
+  --chart-1: #2d74ca; --chart-2: #e4762c; --chart-3: #059488; --chart-4: #6e4fc1; --chart-5: #964a2f;
+  --chart-6: #42acd2; --chart-7: #778a2d; --chart-8: #cd5a97; --chart-9: #daa932; --chart-10: #55a674;
+
+  --shadow-1: 0 1px 0 rgb(36 33 27 / 0.04), 0 1px 2px rgb(36 33 27 / 0.06);
+  --shadow-3: 0 6px 16px rgb(36 33 27 / 0.08), 0 12px 32px rgb(36 33 27 / 0.08);
+
+  --grain-opacity: 0.035;
+  --grain-blend: multiply;
+  --ambient: radial-gradient(1200px 600px at 0% 0%, oklch(0.86 0.025 262 / 0.3), transparent 60%);
+}
+
+/* ── Semantic tokens: dark ("graphite") ───────────────────────────── */
+/* data-theme is always set to the resolved theme (theme-init.js + useTheme), incl. "system". */
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --surface-bg-deep: #141619;
+  --surface-bg: #191c20;
+  --surface-panel: #202327;
+  --surface-raised: #282c30;
+  --surface-overlay: #2f3338;
+  --surface-hover: #24282d;
+  --surface-selected: #2c3136;
+
+  --text-1: #e8ebef;
+  --text-2: #b6bbc1;
+  --text-3: #90969d;
+  --text-disabled: #646970;
+
+  --border-subtle: #2d3135;
+  --border: #393d43;
+  --border-strong: #51565c;
+  --focus-ring: #759ee9;
+
+  --accent: #759ee9;
+  --accent-hover: #8eb1f1;
+  --accent-subtle: #223251;
+  --accent-fg: #10182a;
+
+  --pos: #63d5be;
+  --pos-subtle: #14342e;
+  --neg: #ee8266;
+  --neg-subtle: #43241c;
+  --warn: #edbb64;
+  --warn-subtle: #3c2e14;
+  --info: #79b8ed;
+  --info-subtle: #1c3041;
+
+  --chart-1: #4c8edf; --chart-2: #d97230; --chart-3: #079e92; --chart-4: #846cd1; --chart-5: #ad5f43;
+  --chart-6: #2286a7; --chart-7: #778a2d; --chart-8: #d1649c; --chart-9: #b88c19; --chart-10: #318454;
+
+  --shadow-1: inset 0 1px 0 rgb(255 255 255 / 0.04);
+  --shadow-3: 0 8px 24px rgb(0 0 0 / 0.4), 0 0 0 1px rgb(255 255 255 / 0.06);
+
+  --grain-opacity: 0.05;
+  --grain-blend: soft-light;
+  --ambient: radial-gradient(1200px 600px at 0% 0%, oklch(0.3 0.03 262 / 0.35), transparent 60%);
+}
+
+/* ── Tailwind theme mapping ───────────────────────────────────────── */
+@theme inline {
+  --color-bg-deep: var(--surface-bg-deep);
+  --color-bg: var(--surface-bg);
+  --color-panel: var(--surface-panel);
+  --color-raised: var(--surface-raised);
+  --color-overlay: var(--surface-overlay);
+  --color-hover: var(--surface-hover);
+  --color-selected: var(--surface-selected);
+  --color-fg: var(--text-1);
+  --color-fg-2: var(--text-2);
+  --color-fg-3: var(--text-3);
+  --color-fg-disabled: var(--text-disabled);
+  --color-line-subtle: var(--border-subtle);
+  --color-line: var(--border);
+  --color-line-strong: var(--border-strong);
+  --color-accent: var(--accent);
+  --color-accent-hover: var(--accent-hover);
+  --color-accent-subtle: var(--accent-subtle);
+  --color-accent-fg: var(--accent-fg);
+  --color-pos: var(--pos);
+  --color-pos-subtle: var(--pos-subtle);
+  --color-neg: var(--neg);
+  --color-neg-subtle: var(--neg-subtle);
+  --color-warn: var(--warn);
+  --color-warn-subtle: var(--warn-subtle);
+  --color-info: var(--info);
+  --color-info-subtle: var(--info-subtle);
+  --shadow-card: var(--shadow-1);
+  --shadow-pop: var(--shadow-3);
+  --radius-card: 10px;
+  --font-sans: "Inter Variable", ui-sans-serif, system-ui, "Segoe UI", sans-serif;
+  --font-mono: "Geist Mono Variable", ui-monospace, "Cascadia Mono", monospace;
+}
+
+/* ── Base ─────────────────────────────────────────────────────────── */
+html {
+  font-feature-settings: "cv11", "ss01";
+  -webkit-font-smoothing: antialiased;
+}
+body {
+  min-height: 100dvh;
+  background-color: var(--surface-bg);
+  background-image: var(--ambient);
+  background-attachment: fixed;
+  color: var(--text-1);
+  font-family: var(--font-sans);
+  font-size: 13px;
+  line-height: 18px;
+}
+/* Subtle paper/graphite grain on the page plane only. */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .5 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  opacity: var(--grain-opacity);
+  mix-blend-mode: var(--grain-blend);
+}
+#root {
+  position: relative;
+  z-index: 1;
+}
+@media (prefers-reduced-transparency: reduce), print, (forced-colors: active) {
+  body::before { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition-duration: 0ms !important; animation-duration: 0ms !important; }
+}
+
+/* Native controls and dropdown lists follow the theme instead of the browser's white. */
+input, select, textarea, option, optgroup {
+  background-color: var(--surface-raised);
+  color: var(--text-1);
+}
+
+:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 2px;
+}
+.num {
+  font-variant-numeric: tabular-nums slashed-zero;
+}
