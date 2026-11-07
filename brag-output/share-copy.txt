@@ -1,0 +1,1 @@
+I got tired of logging into every bank to answer "how are we doing?", so I built Financials: one private page for net worth, spending and where it's all headed. It reads my own Google Sheets live in the browser and stores nothing. (Demo data in the video; every number is fictional.)
